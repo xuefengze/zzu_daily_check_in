@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+#-*- coding: UTF-8 -*- 
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import time
@@ -70,6 +72,7 @@ def openurl(driver):
 
 # 流程
 def operate_dk(driver, id, password):
+    time.sleep(1)
     #input id,password
     driver.find_element_by_xpath("//input[@name='uid']").send_keys(id)
     driver.find_element_by_xpath("//input[@name='upw']").send_keys(password)
