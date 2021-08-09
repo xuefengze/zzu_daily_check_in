@@ -1,6 +1,6 @@
 # zzu每日打卡
 
-### 所需库及软件：
+### 依赖：
 * chrome
 * selenium
 * pandas
@@ -22,7 +22,7 @@ pip3 install selenium
 ```
 yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 ```
-`依赖的库`
+`依赖`
 ```
 yum install mesa-libOSMesa-devel gnu-free-sans-fonts wqy-zenhei-fonts
 ```
@@ -36,3 +36,4 @@ chmod +x /usr/bin/chromedriver
 ```
 pip3 install pandas
 ```
+（以及一个垃圾的`log`，仅为了记录是否正常打卡）
