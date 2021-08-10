@@ -30,7 +30,6 @@ yum install mesa-libOSMesa-devel gnu-free-sans-fonts wqy-zenhei-fonts
 ```
 wget http://npm.taobao.org/mirrors/chromedriver/92.0.4515.107/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip
-chmod +x /usr/bin/chromedriver
 ```
 `pandas`
 ```
