@@ -37,3 +37,4 @@ chmod +x /usr/bin/chromedriver
 pip3 install pandas
 ```
 （以及一个垃圾的`log`，仅为了记录是否正常打卡）
+* 使用`cron`时注意路径问题，使用相对路径会报错

@@ -55,7 +55,6 @@ def openChrome():
     option.add_argument('--no-sandbox')
     option.add_argument('--disable-gpu')
     option.add_argument('--disable-dev-shm-usage')
-    #driver = webdriver.Chrome(r'D:\chromedriver_win32\chromedriver.exe', options=option)
     driver = webdriver.Chrome(executable_path='./chromedriver', options=option)
     driver.implicitly_wait(10)  # seconds,隐式等待获取组件，推荐显示，懒得写了
     return driver
@@ -72,7 +71,6 @@ def openurl(driver):
 
 # 流程
 def operate_dk(driver, id, password):
-    time.sleep(1)
     #input id,password
     driver.find_element_by_xpath("//input[@name='uid']").send_keys(id)
     driver.find_element_by_xpath("//input[@name='upw']").send_keys(password)
@@ -120,7 +118,7 @@ def operate_dk(driver, id, password):
 if __name__ == '__main__':
     clean_log()
     driver = openChrome()
-    datas = pd.read_csv('user.csv')
+    datas = pd.read_csv('user.csv',dtype=str)
     for row in datas.itertuples():
         id = getattr(row, 'id')
         password = getattr(row, 'password')
