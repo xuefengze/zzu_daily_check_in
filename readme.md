@@ -5,6 +5,7 @@
 * selenium
 * pandas
 * [chromedriver](https://npm.taobao.org/mirrors/chromedriver)
+* email
 
 ### user.csv(example)
 ```
@@ -17,6 +18,10 @@ id,password
 `selenium`
 ```
 pip3 install selenium
+```
+`email`
+```
+pip3 install email
 ```
 `chrome`
 ```

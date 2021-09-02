@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- coding: UTF-8 -*- 
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
@@ -7,6 +7,7 @@ import logging
 import datetime
 import os
 import pandas as pd
+import mail
 
 today_date = str(datetime.date.today())
 log_path = './log/'
@@ -17,29 +18,6 @@ formatter = logging.Formatter('[%(asctime)s]------%(message)s')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
-
-def clean_log():
-    #对上个月的日志进行删除
-    global log_path
-    global today_date
-
-    # 遍历目录下的所有日志文件 i是文件名
-    for i in os.listdir(log_path):
-        file_path = log_path + i  # 生成日志文件的路径
-
-        # 获取日志的年月，和今天的年月
-        today_m = int(today_date[5:7])  # 今天的月份
-        m = int(i[9:11])  # 日志的月份
-        today_y = int(today_date[0:4])  # 今天的年份
-        y = int(i[4:8])  # 日志的年份
-
-        # 对上个月的日志进行清理，即删除。
-        if (m < today_m):
-            if (os.path.exists(file_path)):  # 判断生成的路径对不对，防止报错
-                os.remove(file_path)  # 删除文件
-        elif (y < today_y):
-            if (os.path.exists(file_path)):
-                os.remove(file_path)
 
 
 # 开启chrome
@@ -70,7 +48,8 @@ def openurl(driver):
     return driver
 
 # 流程
-def operate_dk(driver, id, password):
+def operate_dk(driver, id, password, sender, receiver, smtp):
+    global today_date
     #input id,password
     driver.find_element_by_xpath("//input[@name='uid']").send_keys(id)
     driver.find_element_by_xpath("//input[@name='upw']").send_keys(password)
@@ -80,6 +59,9 @@ def operate_dk(driver, id, password):
         iframe1 = driver.find_element_by_xpath("//iframe[@name='zzj_top_6s']")
     except:
         logging.warning(str(id)+'登陆失败！服务器是否又崩了？')
+        mail_title = '每日打卡失败！'
+        mail_body = "打卡失败！登录失败，或服务器崩溃！"
+        mail.sendmessage(sender, receiver, mail_title, mail_body, smtp)
         return -1
     else:
         # 切换frame
@@ -99,6 +81,9 @@ def operate_dk(driver, id, password):
         #选择地市
         select = Select(driver.find_element_by_id("myvs_13b"))
         select.select_by_index(0)
+        #绿码
+        select = Select(driver.find_element_by_name("myvs_13"))
+        select.select_by_value("g")
 
         #input 具体地址
         ele = driver.find_element_by_xpath("//input[@name='myvs_13c']")
@@ -110,18 +95,27 @@ def operate_dk(driver, id, password):
             driver.find_element_by_css_selector('[onclick="myform52.submit()"]').click()
         except:
             logging.warning(str(id)+'提交失败！')
+            mail_title = '每日打卡失败！'
+            mail_body = "打卡提交失败！"
+            mail.sendmessage(sender, receiver, mail_title, mail_body, smtp)
             return -1
         time.sleep(1)
         logging.warning(str(id)+"打卡成功")
+        mail_title = '每日打卡成功！'
+        mail_body = today_date+"打卡成功！"
+        mail.sendmessage(sender, receiver, mail_title, mail_body, smtp)
 
 
 if __name__ == '__main__':
-    clean_log()
     driver = openChrome()
     datas = pd.read_csv('user.csv',dtype=str)
+    sender = 'example@example.com'
+    smtp = mail.openmail(sender)
     for row in datas.itertuples():
         id = getattr(row, 'id')
         password = getattr(row, 'password')
+        receiver = getattr(row, 'email')
         driver = openurl(driver)
-        operate_dk(driver, id, password)
+        operate_dk(driver, id, password, sender, receiver, smtp)
+    mail.closemail(smtp)
     driver.quit()
