@@ -9,9 +9,9 @@
 
 ### user.csv(example)
 ```
-id,password
-1,2
-123456,12345
+id,password,email
+1,2,example@example.com
+123456,12345,example@example.com
 ```
 
 ### 安装
