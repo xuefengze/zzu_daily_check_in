@@ -4,6 +4,9 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import os
 import pandas as pd
+import pathlib
+
+path = str(pathlib.Path(__file__).parent.absolute())
 
 # 开启chrome
 def openChrome():
@@ -18,7 +21,7 @@ def openChrome():
     option.add_argument('--no-sandbox')
     option.add_argument('--disable-gpu')
     option.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(executable_path=os.getcwd()+'/chromedriver', options=option)
+    driver = webdriver.Chrome(executable_path = path+'/chromedriver', options=option)
     driver.implicitly_wait(10)  # seconds,隐式等待获取组件，推荐显示
     return driver
 
@@ -81,7 +84,7 @@ def operate_dk(driver, id, password):
 
 if __name__ == '__main__':
     driver = openChrome()
-    datas = pd.read_csv(os.getcwd()+'/user.csv',dtype=str)
+    datas = pd.read_csv(path + '/user.csv',dtype = str)
     for row in datas.itertuples():
         id = getattr(row, 'id')
         password = getattr(row, 'password')
