@@ -1,3 +1,4 @@
+#!/bin/bash
 eckin_home="https://jksb.v.zzu.edu.cn"
 checkin_login="https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/login"
 checkin_submit="https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/jksb"
@@ -16,7 +17,7 @@ myvs_13a="41"
 myvs_13b="4101"
 myvs_13c="郑大"
 myvs_24="否"
-myvs_26="2"
+myvs_26="3"
 jingdu="113.53"
 weidu="34.817"
 
