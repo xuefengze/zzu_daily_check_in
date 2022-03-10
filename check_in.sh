@@ -2,6 +2,7 @@
 checkin_login="https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/login"
 checkin_submit="https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/jksb"
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 name=""
 passwd=""
 smbtn="进入健康上报平台"
@@ -31,4 +32,4 @@ do
 	passwd=${context[1]}
 
 	punch
-done < user.txt
+done < $SCRIPT_DIR/user.txt
