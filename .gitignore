@@ -1,6 +1,6 @@
 *
 *.*
-!*.py
 !*.md
 !.gitignore
 !*.sh
+!*.txt
