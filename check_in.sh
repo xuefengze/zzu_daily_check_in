@@ -19,10 +19,11 @@ punch () {
 	myvs_13b="4101"	#city
 	myvs_13c="郑大"	#location
 	myvs_26="5"		  #vaccine
+	myvs_9="y"			# did cvoid test ?
 	longitude="113.631419"
 	latitude="34.753439"
 
-	wget -q -O - --post-data "myvs_1=否&myvs_2=否&myvs_3=否&myvs_4=否&myvs_5=否&myvs_6=否&myvs_7=否&myvs_8=否&myvs_9=否&myvs_10=否&myvs_11=否&myvs_12=否&myvs_13a=${myvs_13a}&myvs_13b=${myvs_13b}&myvs_13c=${myvs_13c}&myvs_24=${myvs_24}&myvs_26=${myvs_26}&memo22=成功获取&jingdu=${longitude}&weidu=${latitude}&door=&day6=&did=2&men6=a&sheng6=&shi6=&fun18=381&fun3=&${ptoid_sid}" "$checkin_submit" > /dev/null
+	wget -q -O - --post-data "myvs_1=否&myvs_2=否&myvs_3=否&myvs_4=否&myvs_5=否&myvs_6=否&myvs_7=否&myvs_8=否&myvs_9=${myvs_9}&myvs_11=否&myvs_12=否&myvs_13=否&myvs_15=否&myvs_13a=${myvs_13a}&myvs_13b=${myvs_13b}&myvs_13c=${myvs_13c}&myvs_24=${myvs_24}&myvs_26=${myvs_26}&memo22=成功获取&jingdu=${longitude}&weidu=${latitude}&door=&day6=&did=2&men6=a&sheng6=&shi6=&fun18=381&fun3=&${ptoid_sid}" "$checkin_submit" > /dev/null
 }
 
 while IFS="" read -r line || [ -n "$line" ]
