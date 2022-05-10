@@ -19,7 +19,7 @@ punch () {
 	myvs_13b="4101"	#city
 	myvs_13c="郑大"	#location
 	myvs_26="5"		  #vaccine
-	myvs_9="y"			# did cvoid test ?
+	myvs_9="y"			# did covid test ?
 	longitude="113.631419"
 	latitude="34.753439"
 
